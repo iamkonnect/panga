@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // Import for rootBundle
-import 'dart:typed_data'; // Import for Uint8List
+// Import for Uint8List
 import 'dart:async'; // Import for Completer
 import 'dart:ui' as ui; // Import for ui.Image
-import 'home_screen.dart'; // Import for HomeScreen
+import 'onboarding_screen.dart'; // Import OnboardingScreen
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -21,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(Duration(seconds: 3), () {});
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
+      MaterialPageRoute(builder: (context) => const OnboardingScreen()),
     );
   }
 

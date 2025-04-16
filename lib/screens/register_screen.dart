@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // Blue upper section with title
+          // Blue upper section
           Container(
             height: 250,
             decoration: const BoxDecoration(
@@ -16,16 +16,6 @@ class LoginScreen extends StatelessWidget {
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(40),
                 bottomRight: Radius.circular(40),
-              ),
-            ),
-            child: const Center(
-              child: Text(
-                'Panga Properties',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white, // White text for contrast
-                ),
               ),
             ),
           ),
@@ -53,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     const Center(
                       child: Text(
-                        'Login',
+                        'Register',
                         style: TextStyle(
                           fontSize: 24,
                           color: Color(0xFF2A2D3E),
@@ -63,7 +53,49 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(height: 40),
                     TextField(
                       decoration: InputDecoration(
+                        labelText: 'Full Name',
+                        filled: true,
+                        fillColor: const Color(0xFFF5F6FA),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 16),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Phone Number',
+                        filled: true,
+                        fillColor: const Color(0xFFF5F6FA),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 16),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextField(
+                      decoration: InputDecoration(
                         labelText: 'Username',
+                        filled: true,
+                        fillColor: const Color(0xFFF5F6FA),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 16),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Email',
                         filled: true,
                         fillColor: const Color(0xFFF5F6FA),
                         border: OutlineInputBorder(
@@ -89,18 +121,22 @@ class LoginScreen extends StatelessWidget {
                             horizontal: 20, vertical: 16),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Forget Password?',
-                          style: TextStyle(color: Color(0xFF2A2D3E)),
+                    const SizedBox(height: 20),
+                    TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'Confirm Password',
+                        filled: true,
+                        fillColor: const Color(0xFFF5F6FA),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide.none,
                         ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 16),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 40),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -113,7 +149,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         onPressed: () {},
                         child: const Text(
-                          'Login',
+                          'Register',
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ),
@@ -122,10 +158,10 @@ class LoginScreen extends StatelessWidget {
                     Center(
                       child: TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/register');
+                          Navigator.pushNamed(context, '/login');
                         },
                         child: const Text(
-                          'Do you have an account? Sign Up',
+                          'Already got an Account? Login',
                           style: TextStyle(color: Color(0xFF2A2D3E)),
                         ),
                       ),
