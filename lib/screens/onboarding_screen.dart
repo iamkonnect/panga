@@ -19,8 +19,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       'image': 'assets/Illustration.png',
     },
     {
-      'title': 'FOR SALE',
-      'subtitle': 'Sale your Property',
+      'title': 'Sale your Property',
+      'subtitle': '',
       'image': 'assets/property.png',
     },
   ];

@@ -6,163 +6,147 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF5B5FE9), // Figma blue background
       body: Stack(
         children: [
-          // Blue upper section with title
-          Container(
-            height: 250,
-            decoration: const BoxDecoration(
-              color: Color(0xFF2A2D3E), // Dark blue-grey
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(40),
-                bottomRight: Radius.circular(40),
-              ),
-            ),
-            child: const Center(
-              child: Text(
-                'Panga Properties',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white, // White text for contrast
+          // Logo and app name at the top center
+          Positioned(
+            top: 80,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/panga_logo.png',
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.contain,
                 ),
-              ),
+                // Removed the title below the logo
+              ],
             ),
           ),
-          // White form area with curved top corners
+          // Login form area
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: MediaQuery.of(context).size.height - 180,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, -5),
-                  ),
-                ],
+              height: MediaQuery.of(context).size.height * 0.68,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF8F8FC),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                ),
               ),
-              child: SingleChildScrollView(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 28, vertical: 32),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Center(
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Color(0xFF2A2D3E),
-                        ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF222222),
                       ),
                     ),
-                    const SizedBox(height: 40),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Username',
-                        filled: true,
-                        fillColor: const Color(0xFFF5F6FA),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide.none,
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 16),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        filled: true,
-                        fillColor: const Color(0xFFF5F6FA),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide.none,
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 16),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Forget Password?',
-                          style: TextStyle(color: Color(0xFF2A2D3E)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 30),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF2A2D3E),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
+                    const SizedBox(height: 32),
+                    // Input fields container
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(22),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.03),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          TextField(
+                            decoration: InputDecoration(
+                              prefixIcon:
+                                  Icon(Icons.person, color: Color(0xFFFFB86C)),
+                              hintText: 'Username',
+                              hintStyle: TextStyle(color: Color(0xFFBDBDBD)),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                          Divider(height: 1, color: Color(0xFFF0F0F0)),
+                          TextField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              prefixIcon:
+                                  Icon(Icons.lock, color: Color(0xFFB7AFFF)),
+                              hintText: 'Password',
+                              hintStyle: TextStyle(color: Color(0xFFBDBDBD)),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/register');
-                        },
-                        child: const Text(
-                          'Do you have an account? Sign Up',
-                          style: TextStyle(color: Color(0xFF2A2D3E)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    // Social login icons row below sign up
+                    const SizedBox(height: 18),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        IconButton(
-                          icon: Image.network(
-                            'https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_(2019).png',
-                            width: 24,
-                            height: 24,
-                          ),
+                        TextButton(
                           onPressed: () {},
+                          child: const Text(
+                            'Forget Password?',
+                            style: TextStyle(
+                              color: Color(0xFF7B7B7B),
+                              fontSize: 15,
+                            ),
+                          ),
                         ),
-                        const SizedBox(width: 20),
-                        IconButton(
-                          icon: Image.network(
-                            'https://cdn-icons-png.flaticon.com/512/300/300221.png',
-                            width: 24,
-                            height: 24,
+                        const Spacer(),
+                        SizedBox(
+                          height: 48,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFF5B5FE9),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 36),
+                              elevation: 0,
+                            ),
+                            onPressed: () {},
+                            child: const Text(
+                              'Login',
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
-                          onPressed: () {},
-                        ),
-                        const SizedBox(width: 20),
-                        IconButton(
-                          icon: Image.network(
-                            'https://cdn-icons-png.flaticon.com/512/179/179309.png',
-                            width: 24,
-                            height: 24,
-                          ),
-                          onPressed: () {},
                         ),
                       ],
                     ),
+                    const Spacer(),
+                    // Social login icons row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _SocialIcon(asset: 'assets/facebook.png'),
+                        const SizedBox(width: 24),
+                        _SocialIcon(asset: 'assets/google.png'),
+                        const SizedBox(width: 24),
+                        _SocialIcon(asset: 'assets/apple.png'),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),
@@ -173,3 +157,32 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+class _SocialIcon extends StatelessWidget {
+  final String asset;
+  const _SocialIcon({required this.asset});
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: 24,
+      backgroundColor: Colors.white,
+      child: Image.asset(
+        asset,
+        width: 28,
+        height: 28,
+        fit: BoxFit.contain,
+      ),
+    );
+  }
+}
+
+// For images not showing up, make sure in your pubspec.yaml you have:
+// flutter:
+//   assets:
+//     - assets/panga_logo.png
+//     - assets/facebook.png
+//     - assets/google.png
+//     - assets/apple.png
+//
+// Also, ensure the files assets/google.png and assets/apple.png actually exist in your assets folder and are named correctly (case-sensitive).
