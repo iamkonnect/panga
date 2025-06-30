@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Import for rootBundle
-// Import for Uint8List
-import 'dart:async'; // Import for Completer
-import 'dart:ui' as ui; // Import for ui.Image
-import 'onboarding_screen.dart'; // Import OnboardingScreen
+import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _navigateToHome() async {
-    await Future.delayed(Duration(seconds: 3), () {});
+    await Future.delayed(const Duration(seconds: 3));
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const OnboardingScreen()),
@@ -30,29 +26,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       body: Center(
-        child: FutureBuilder<ui.Image>(
-          future: _loadSplashImage(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return RawImage(image: snapshot.data);
-            } else {
-              return CircularProgressIndicator();
-            }
-          },
+        child: Image.asset(
+          'assets/panga_logo.png',
+          width: 180,
+          fit: BoxFit.contain,
         ),
       ),
     );
-  }
-
-  Future<ui.Image> _loadSplashImage() async {
-    final ByteData data = await rootBundle.load('assets/panga logo.png');
-    final Uint8List bytes = data.buffer.asUint8List();
-    final Completer<ui.Image> completer = Completer();
-    ui.decodeImageFromList(bytes, (ui.Image img) {
-      completer.complete(img);
-    });
-    return completer.future;
   }
 }
