@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'question_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController(text: 'john_doe');
+  final _emailController = TextEditingController(text: 'john@example.com');
+  final _passwordController = TextEditingController(text: 'password123');
+  final _confirmPasswordController = TextEditingController(text: 'password123');
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +21,6 @@ class RegisterScreen extends StatelessWidget {
       backgroundColor: const Color(0xFF5B5FE9),
       body: Stack(
         children: [
-          // Register form area
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -25,114 +36,163 @@ class RegisterScreen extends StatelessWidget {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 28, vertical: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Register',
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF222222),
-                      ),
-                    ),
-                    const SizedBox(height: 32),
-                    // Username
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 18),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          prefixIcon:
-                              Icon(Icons.person, color: Color(0xFFFFB86C)),
-                          hintText: 'Username',
-                          hintStyle: TextStyle(color: Color(0xFFBDBDBD)),
-                          border: InputBorder.none,
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 18),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Register',
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF222222),
                         ),
                       ),
-                    ),
-                    // Email
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 18),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          prefixIcon:
-                              Icon(Icons.email, color: Color(0xFF6EE7B7)),
-                          hintText: 'Email',
-                          hintStyle: TextStyle(color: Color(0xFFBDBDBD)),
-                          border: InputBorder.none,
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 18),
+                      const SizedBox(height: 32),
+                      // Username
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 18),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(18),
                         ),
-                      ),
-                    ),
-                    // Password
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 32),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          prefixIcon:
-                              Icon(Icons.lock, color: Color(0xFFB7AFFF)),
-                          hintText: 'Password',
-                          hintStyle: TextStyle(color: Color(0xFFBDBDBD)),
-                          border: InputBorder.none,
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 18),
-                        ),
-                      ),
-                    ),
-                    // Register button
-                    SizedBox(
-                      width: double.infinity,
-                      height: 56,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF5B5FE9),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                        child: TextFormField(
+                          controller: _usernameController,
+                          decoration: InputDecoration(
+                            prefixIcon:
+                                Icon(Icons.person, color: Color(0xFFFFB86C)),
+                            hintText: 'Username',
+                            hintStyle: TextStyle(color: Color(0xFFBDBDBD)),
+                            border: InputBorder.none,
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 18),
                           ),
-                          elevation: 0,
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Enter username'
+                              : null,
                         ),
-                        onPressed: () {},
-                        child: const Text(
-                          'Register',
-                          style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                      ),
+                      // Email
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 18),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        child: TextFormField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                            prefixIcon:
+                                Icon(Icons.email, color: Color(0xFF6EE7B7)),
+                            hintText: 'Email',
+                            hintStyle: TextStyle(color: Color(0xFFBDBDBD)),
+                            border: InputBorder.none,
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 18),
+                          ),
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Enter email'
+                              : null,
+                        ),
+                      ),
+                      // Password
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 18),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        child: TextFormField(
+                          controller: _passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            prefixIcon:
+                                Icon(Icons.lock, color: Color(0xFFB7AFFF)),
+                            hintText: 'Password',
+                            hintStyle: TextStyle(color: Color(0xFFBDBDBD)),
+                            border: InputBorder.none,
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 18),
+                          ),
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Enter password'
+                              : null,
+                        ),
+                      ),
+                      // Confirm Password
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 32),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        child: TextFormField(
+                          controller: _confirmPasswordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.lock_outline,
+                                color: Color(0xFFB7AFFF)),
+                            hintText: 'Confirm Password',
+                            hintStyle: TextStyle(color: Color(0xFFBDBDBD)),
+                            border: InputBorder.none,
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 18),
+                          ),
+                          validator: (value) =>
+                              value != _passwordController.text
+                                  ? 'Passwords do not match'
+                                  : null,
+                        ),
+                      ),
+                      // Register button
+                      SizedBox(
+                        width: double.infinity,
+                        height: 56,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF5B5FE9),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            elevation: 0,
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const QuestionScreen()),
+                              );
+                            }
+                          },
+                          child: const Text(
+                            'Register',
+                            style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const Spacer(),
-                    // Social login icons row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        _SocialIcon(asset: 'assets/facebook.png'),
-                        const SizedBox(width: 24),
-                        _SocialIcon(asset: 'assets/google.png'),
-                        const SizedBox(width: 24),
-                        _SocialIcon(asset: 'assets/apple.png'),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                  ],
+                      const Spacer(),
+                      // Social login icons row
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _SocialIcon(asset: 'assets/facebook.png'),
+                          const SizedBox(width: 24),
+                          _SocialIcon(asset: 'assets/google.png'),
+                          const SizedBox(width: 24),
+                          _SocialIcon(asset: 'assets/apple.png'),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                    ],
+                  ),
                 ),
               ),
             ),
